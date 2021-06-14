@@ -1,6 +1,25 @@
 
 import React from 'react'; 
 import jsonPlaceholder from '../apis/jsonPlaceholder'; 
+
+
+// combination of fetchUser and fetchPosts
+
+export const fetchPostsAndUsers = () => {
+    return async (dispatch) =>{
+        // remeber to dispatch function (call 'fetchPosts');
+        // make it to await to make sure we get the response from api 
+         await dispatch(fetchPost()); 
+
+        // GET lists of posts 
+        
+
+    };
+
+}; 
+
+
+// import _ from 'lodash'; 
 // Action creator 
 // Fetch the post of all users
 export const fetchPost = () =>{
@@ -15,14 +34,34 @@ export const fetchPost = () =>{
 };
 
 
-//fetch the specific 
+// fetch the specific user's information 
 export const fetchUsers = (id) =>{
 
-    return async(dispatch ,getState)=>{
+    return async(dispatch)=>{
          const response = await jsonPlaceholder.get(`/users/${id}`);
-         dispatch({type: 'FETCJ_USERS', payload: response.data}); 
+         dispatch({type: 'FETCH_USERS', payload: response.data}); 
     };
 };
+
+
+// export const fetchUsers = (id) =>  dispatch => {
+//     _fetchUser(id,dispatch);
+// };
+
+ 
+// const _fetchUser = _.memoize(async (id, dispatch) =>{
+//     const response = await jsonPlaceholder.get(`/users/${id}`);
+//     dispatch({type: 'FETCH_USERS', payload: response.data}); 
+// });
+
+
+
+
+
+
+
+
+
 
 
 
