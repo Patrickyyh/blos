@@ -1,14 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchUsers} from '../actions'
+
 
 
 
 class UserHeader extends React.Component{
-    componentDidMount(){
-        // use fetchUser actionCreator to make request to api 
-        this.props.fetchUsers(this.props.userId);
-    }
 
 
     render(){
@@ -30,4 +26,4 @@ const mapStateToProps = (state,ownProps) =>{
 };
 
 
-export default connect(mapStateToProps , {fetchUsers: fetchUsers}) (UserHeader); 
+export default connect(mapStateToProps) (UserHeader); 

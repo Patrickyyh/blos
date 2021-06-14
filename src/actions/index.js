@@ -1,18 +1,34 @@
 
 import React from 'react'; 
 import jsonPlaceholder from '../apis/jsonPlaceholder'; 
-
+import _ from 'lodash'; 
 
 // combination of fetchUser and fetchPosts
 
 export const fetchPostsAndUsers = () => {
-    return async (dispatch) =>{
+    return async (dispatch,getState) =>{
         // remeber to dispatch function (call 'fetchPosts');
-        // make it to await to make sure we get the response from api 
+        // make it to await to make sure we get the response from api
          await dispatch(fetchPost()); 
 
-        // GET lists of posts 
+         //using getState to fetch the data (using lodash _.map function);  
+         // using the _.uniq function to fetch the unique elements from the array 
+        // const userIds=  _.uniq(_.map(getState().posts,'userId')); 
         
+        // //calling userfetch. 
+        // userIds.forEach(id => dispatch(fetchUsers(id)));
+
+        // console.log(getState().posts); 
+        
+        // making use of chain 
+        _.chain(getState().posts)
+        .map('userId').uniq()
+        .forEach(id =>dispatch(fetchUsers(id)))
+        .value(); 
+
+         
+        
+
 
     };
 
